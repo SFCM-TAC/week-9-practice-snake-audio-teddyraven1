@@ -3,7 +3,7 @@ The code you find here is a game of Snake implemented in p5.js that I stole from
 This assignment is an exercise in reading and understanding code, and in using open source libraries. You'll need to look at their references to figure out what functions and objects to use to load and play sounds.
 
 P5.js reference: https://p5js.org/reference/
-P5.sound.js reference: https://p5js.org/reference/#/libraries/p5.sound
+P5.sound.js reference: https://p5js.org/reference/#/libraries/p5.sound˝
 Tone.js reference: https://tonejs.github.io/docs/
 Our Tone.js code from class a week ago: https://github.com/SFCM-TAC/week7-inclass-tonejs
 

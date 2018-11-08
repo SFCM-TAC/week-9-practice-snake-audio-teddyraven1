@@ -1,5 +1,41 @@
 
 // the snake is divided into small segments, which are drawn and edited on each 'draw' call
+
+/*function preload() {
+  song = loadSound('../Sounds/Griz.m4a');
+}
+
+function setup() {
+
+  song.loop(); // song is ready to play during setup() because it was loaded during preload
+
+}*/
+
+
+/*function keydown() {
+  if ( song.isPlaying() ) { // .isPlaying() returns a boolean
+    song.pause(); // .play() will resume from .pause() position
+    background(255,0,0);
+  } else {
+    song.play();
+    background(0,255,0);
+  }
+}*/
+
+/*var polySynth = new Tone.PolySynth(4, Tone.Synth).toMaster();
+
+document.querySelector('#chord').addEventListener('mousedown', function(){
+	//an array of notes can be passed into PolySynth
+	polySynth.triggerAttack(['C4', 'E4', 'G4', 'B4'])
+})
+
+document.querySelector('#chord').addEventListener('mouseup', function(){
+	//unlike the other instruments, the notes need to be passed into triggerRelease
+	polySynth.triggerRelease(['C4', 'E4', 'G4', 'B4'])
+})*/
+
+
+
 var numSegments = 10;
 var direction = 'right';
 
@@ -7,6 +43,7 @@ var xStart = 0; //starting x coordinate for snake
 var yStart = 250; //starting y coordinate for snake
 var diff = 10;
 
+var speed = 15;
 var xCor = [];
 var yCor = [];
 
@@ -21,7 +58,7 @@ function setup() {
   scoreElem.style('color', 'white');
 
   createCanvas(500, 500);
-  frameRate(15);
+  frameRate(speed);
   stroke(255);
   strokeWeight(10);
   updateFruitCoordinates();
@@ -29,6 +66,7 @@ function setup() {
   for (var i = 0; i < numSegments; i++) {
     xCor.push(xStart + (i * diff));
     yCor.push(yStart);
+
   }
 }
 
@@ -93,6 +131,7 @@ function checkGameStatus() {
     noLoop();
     var scoreVal = parseInt(scoreElem.html().substring(8));
     scoreElem.html('Game ended! Your score was : ' + scoreVal);
+    synth.triggerAttackRelease('C2', '4n');
   }
 }
 
@@ -124,6 +163,9 @@ function checkForFruit() {
     yCor.unshift(yCor[0]);
     numSegments++;
     updateFruitCoordinates();
+    synth.triggerAttackRelease('C4', '8n');
+    speed = speed + 2;
+    frameRate(speed);
   }
 }
 
@@ -136,6 +178,7 @@ function updateFruitCoordinates() {
 
   xFruit = floor(random(10, (width - 100) / 10)) * 10;
   yFruit = floor(random(10, (height - 100) / 10)) * 10;
+
 }
 
 function keyPressed() {
@@ -162,3 +205,42 @@ function keyPressed() {
       break;
   }
 }
+
+
+
+//create a synth and connect it to the master output (your speakers)
+var synth = new Tone.MonoSynth(
+{
+  envelope: {
+  attack  : 0.1 ,
+  decay  : 0.05 ,
+  sustain  : 0.5 ,
+  release  : 0.5
+  //attackCurve  : linear
+  //releaseCurve  : exponential
+    }
+  }
+).toMaster();
+
+
+
+/*switch (event.key) {
+  case "a":
+    synth.triggerAttackRelease('F3', '8n');
+    break;
+    case "left":
+      synth.triggerAttackRelease('G3', '8n');
+      break;
+  case "right":
+    synth.triggerAttackRelease('Ab3', '8n');
+    break;
+  case "up":
+    synth.triggerAttackRelease('Bb3', '8n');
+    break;
+  case "down":
+    synth.triggerAttackRelease('C4', '8n');
+    break;
+}*/
+
+
+//document.addEventListener('keydown', playSound);
