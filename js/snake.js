@@ -34,7 +34,10 @@ document.querySelector('#chord').addEventListener('mouseup', function(){
 	polySynth.triggerRelease(['C4', 'E4', 'G4', 'B4'])
 })*/
 
-
+var player = new Tone.Player({
+  "url" : "Sounds/Griz.m4a",
+  "autostart" : true,
+}).toMaster();
 
 var numSegments = 10;
 var direction = 'right';
@@ -66,6 +69,10 @@ function setup() {
   for (var i = 0; i < numSegments; i++) {
     xCor.push(xStart + (i * diff));
     yCor.push(yStart);
+
+  /*  song = loadSound('../Sounds/Griz.m4a');
+    song.loop();*/
+
 
   }
 }
